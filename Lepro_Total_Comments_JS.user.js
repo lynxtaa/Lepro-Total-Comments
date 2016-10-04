@@ -12,7 +12,7 @@
 // @version      1.5
 // ==/UserScript==
 
-var BEST_TRESHOLD = 0.75,
+var BEST_TRESHOLD = 0.75, // Порог рейтинга, можно поиграться со значением
 	std_dev;
 
 var all = document.createElement('a'),
@@ -32,7 +32,7 @@ all.textContent = 'все';
 controls.appendChild(best);
 controls.appendChild(all);
 
-// Лучшее
+// Лучшие
 best.addEventListener('click', function(e) {
 	e.preventDefault();
 
