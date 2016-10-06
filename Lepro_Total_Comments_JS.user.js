@@ -9,11 +9,10 @@
 // @include      http*://*.leprosorium.ru/comments/*
 // @copyright    2016, lynxtaa
 // @grant        none
-// @version      1.51
+// @version      1.6
 // ==/UserScript==
 
 var BEST_TRESHOLD = 0.75, // Порог рейтинга, можно поиграться со значением
-	std_dev,
 	hideComments = parseComments;
 
 var all = document.createElement('a'),
@@ -37,7 +36,7 @@ controls.appendChild(all);
 best.addEventListener('click', function(e) {
 	e.preventDefault();
 
-	if (this.className === 'active') return false;
+	if (this.className == 'active') return false;
 
 	this.className = 'active';
 	this.nextSibling.className = '';
@@ -49,11 +48,12 @@ best.addEventListener('click', function(e) {
 all.addEventListener('click', function(e) {
 	e.preventDefault();
 
-	if (std_dev && this.className !== 'active') {
-		this.className = 'active';
-		this.previousSibling.className = '';
-		document.body.removeChild(style);
-	}
+	if (this.className == 'active') return false;
+
+	this.className = 'active';
+	this.previousSibling.className = '';
+	document.body.removeChild(style);
+
 }, false);
 
 
@@ -62,6 +62,7 @@ function parseComments() {
 	var	abovenull = 0,
 		rating_square_sum = 0,
 		rating_sum = 0,
+		std_dev,
 		shown = votes.length;
 
 	var ratings = votes.map(function(el) {
@@ -78,7 +79,7 @@ function parseComments() {
 
 	if (!abovenull) return null;
 
-	std_dev = Math.sqrt((rating_square_sum / abovenull) -
+	var std_dev = Math.sqrt((rating_square_sum / abovenull) -
 				Math.pow(rating_sum / abovenull, 2));
 
 	hideComments = function() {
