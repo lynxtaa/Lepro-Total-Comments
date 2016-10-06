@@ -9,7 +9,7 @@
 // @include      http*://*.leprosorium.ru/comments/*
 // @copyright    2016, lynxtaa
 // @grant        none
-// @version      1.5
+// @version      1.51
 // ==/UserScript==
 
 var BEST_TRESHOLD = 0.75, // Порог рейтинга, можно поиграться со значением
