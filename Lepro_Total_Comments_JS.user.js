@@ -48,12 +48,12 @@ best.addEventListener('click', function(e) {
 all.addEventListener('click', function(e) {
 	e.preventDefault();
 
-	if (this.className == 'active') return false;
+	if (hideComments == parseComments) return false;
 
 	this.className = 'active';
 	this.previousSibling.className = '';
-	document.body.removeChild(style);
 
+	document.body.removeChild(style);
 }, false);
 
 
@@ -62,7 +62,6 @@ function parseComments() {
 	var	abovenull = 0,
 		rating_square_sum = 0,
 		rating_sum = 0,
-		std_dev,
 		shown = votes.length;
 
 	var ratings = votes.map(function(el) {
