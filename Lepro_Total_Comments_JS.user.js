@@ -13,7 +13,8 @@
 // ==/UserScript==
 
 var BEST_TRESHOLD = 0.75, // Порог рейтинга, можно поиграться со значением
-	std_dev;
+	std_dev,
+	hideComments = parseComments;
 
 var all = document.createElement('a'),
 	best = document.createElement('a'),
@@ -36,18 +37,12 @@ controls.appendChild(all);
 best.addEventListener('click', function(e) {
 	e.preventDefault();
 
-	if (this.className === 'active') {
-		return false;
-	}
+	if (this.className === 'active') return false;
 
 	this.className = 'active';
 	this.nextSibling.className = '';
 
-	if (std_dev) {
-		document.body.appendChild(style);
-	} else {
-		parseComments();
-	}
+	hideComments();
 }, false);
 
 // Показать всё
@@ -85,6 +80,10 @@ function parseComments() {
 
 	std_dev = Math.sqrt((rating_square_sum / abovenull) -
 				Math.pow(rating_sum / abovenull, 2));
+
+	hideComments = function() {
+		document.body.appendChild(style);
+	};
 
 	for (var i = ratings.length; i--; ) {
 		if (ratings[i].rating / std_dev >= BEST_TRESHOLD) continue;
